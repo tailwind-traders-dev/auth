@@ -35,4 +35,12 @@ public class User
     public DateTimeOffset MagicLinkExpiresAt { get; set; } = new DateTime();
     [Column("created_at")]
     public DateTimeOffset CreatedAt { get; set; } = new DateTime();
+
+    public void PrepareMagicLink(){
+      this.MagicLink = Guid.NewGuid().ToString();
+      this.MagicLinkExpiresAt = DateTimeOffset.UtcNow.AddHours(1);
+    }
+    public bool IsMagicLinkExpired(){
+      return this.MagicLinkExpiresAt < DateTimeOffset.UtcNow;
+    }
 }

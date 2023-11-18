@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -10,6 +10,7 @@
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>true</IsPackable>
+    <UserSecretsId>8e96c447-d1cd-4974-9923-23b5d095deee</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Release'">
@@ -19,6 +20,8 @@
     <Watch Include="**\*.cs;**\*.js;**\*.json;**\*.html;**.*.md" Exclude="node_modules\**\*;" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' != 'Release'">
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="7.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
@@ -61,7 +64,7 @@
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist/**" />
-      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

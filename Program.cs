@@ -36,8 +36,6 @@ builder.Services.AddAuthentication();
 
 
 var app = builder.Build();
-app.UseStaticFiles();
-app.MapFallbackToFile("index.html");
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -58,6 +56,7 @@ app.MapGet("/", (HttpContext context) =>
     {"rel","signin"},
     {"href","/signin"}
   });
+  return Results.Json(links);
 });
 
 app.MapGet("/signin", (HttpContext context) =>
